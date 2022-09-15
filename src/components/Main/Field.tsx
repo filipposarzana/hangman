@@ -1,16 +1,14 @@
-import React from "react";
-import { observer } from "mobx-react-lite";
-import clsx from "clsx";
-
-import { guessState } from "../../state/guessState";
-import { themeState } from "../../state/themeState";
+import clsx from 'clsx'
+import { observer } from 'mobx-react-lite'
+import { guessState } from '../../state/guessState'
+import { themeState } from '../../state/themeState'
 
 const Field = ({ isSpace, letter }: { isSpace: boolean; letter: string }) => {
   const renderLetter = () => {
     if (guessState.correctGuess.includes(letter)) {
-      return letter.toUpperCase();
+      return letter.toUpperCase()
     }
-  };
+  }
 
   return (
     <div
@@ -24,16 +22,16 @@ const Field = ({ isSpace, letter }: { isSpace: boolean; letter: string }) => {
           flex justify-center align-center
           border-b-4
         `,
-        { "border-blue-dark": !isSpace && themeState.theme === "light" },
-        { "border-orange": !isSpace && themeState.theme === "dark" },
-        { "border-transparent": isSpace },
-        { "text-black": themeState.theme === "light" },
-        { "text-white": themeState.theme === "dark" }
+        { 'border-blue-dark': !isSpace && themeState.theme === 'light' },
+        { 'border-orange': !isSpace && themeState.theme === 'dark' },
+        { 'border-transparent': isSpace },
+        { 'text-black': themeState.theme === 'light' },
+        { 'text-white': themeState.theme === 'dark' },
       )}
     >
       {renderLetter()}
     </div>
-  );
-};
+  )
+}
 
-export default observer(Field);
+export default observer(Field)

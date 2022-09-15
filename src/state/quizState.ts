@@ -1,53 +1,48 @@
-import { action, observable } from "mobx";
-import { shuffle, take, map } from "lodash-es";
-
-import Quiz from "../class/Quiz";
-import { chanceState } from "./chanceState";
-import { quiz } from "../data/quiz";
+import { map } from 'lodash-es'
+import { action, observable } from 'mobx'
+import Quiz from '../class/Quiz'
+import { quiz } from '../data/quiz'
+import { chanceState } from './chanceState'
 
 class QuizState {
   @observable
-  stage: number;
+  stage: number
 
   @observable
-  quizzes: Quiz[];
+  quizzes: Quiz[]
 
   @observable
-  currentQuiz: Quiz;
+  currentQuiz: Quiz
 
   @observable
-  result: "win" | "lose" | null;
+  result: 'win' | 'lose' | null
 
   constructor() {
-    this.quizzes = this.getQuizzes();
-    this.stage = 1;
-    this.result = null;
-    this.currentQuiz = this.quizzes[this.stage - 1];
+    this.quizzes = this.getQuizzes()
+    this.stage = 1
+    this.result = null
+    this.currentQuiz = this.quizzes[this.stage - 1]
   }
 
   @action
   getQuizzes() {
-    const randomFiveQuizzes = take(shuffle(quiz), 5);
-    return map(
-      randomFiveQuizzes,
-      ({ hint, answers }) => new Quiz(hint, answers)
-    );
+    return map(quiz, ({ hint, answers }) => new Quiz(hint, answers))
   }
 
   @action
   levelUp() {
-    this.stage++;
-    this.currentQuiz = this.quizzes[this.stage - 1];
+    this.stage++
+    this.currentQuiz = this.quizzes[this.stage - 1]
   }
 
   @action
   reset() {
-    this.quizzes = this.getQuizzes();
-    this.stage = 1;
-    this.result = null;
-    this.currentQuiz = this.quizzes[this.stage - 1];
-    chanceState.chance = 5;
+    this.quizzes = this.getQuizzes()
+    this.stage = 1
+    this.result = null
+    this.currentQuiz = this.quizzes[this.stage - 1]
+    chanceState.chance = 10
   }
 }
 
-export const quizState = new QuizState();
+export const quizState = new QuizState()

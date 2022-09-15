@@ -1,11 +1,9 @@
-import React from "react";
-import { observer } from "mobx-react-lite";
-
-import Hint from "./Hint";
-import Hangman from "./Hangman";
-import KeyPress from "./KeyPress";
-import Keyboard from "../Keyboard";
-import { keyboardState } from "../../state/keyboardState";
+import { observer } from 'mobx-react-lite'
+import { keyboardState } from '../../state/keyboardState'
+import Keyboard from '../Keyboard'
+import Hangman from './Hangman'
+import Hint from './Hint'
+import KeyPress from './KeyPress'
 
 const Main = () => {
   return (
@@ -15,7 +13,7 @@ const Main = () => {
       <KeyPress />
       {keyboardState.isOpen && <Keyboard />}
     </div>
-  );
-};
+  )
+}
 
-export default observer(Main);
+export default observer(Main)
